@@ -8,7 +8,7 @@ import * as fs from 'fs/promises'
 import path from "path";
 import HttpError from "../helpers/HTTPErrors";
 
-
+const BASE_URL_BACK: string | undefined = process.env.BASE_URL_BACK 
 
 const imagePath = path.resolve("public", "images")
 
@@ -31,14 +31,16 @@ const add: MiddlewareFn = async (req, res) => {
     }
 
     const { path: oldPath, filename } = req.file;
+    const body = req.body;
     const newPath = path.join(imagePath, filename);
     await fs.rename(oldPath, newPath);
     const productURL = path.join("images", filename);
+    // body.productURL = `${process.env.BASE_URL_BACK}/${productURL.replace("\\", "/")}`;
     const newProduct = {
         title: req.body.title,
         description: req.body.description,
         details: req.body.details,
-        img: productURL,
+        img:  productURL.replace(/\\/g, "/"),
         price: req.body.price,
     } as IProduct
 
