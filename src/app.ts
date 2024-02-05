@@ -10,7 +10,9 @@ app.use(cors())
 app.use(express.json());
 
 
-app.use('/products', productsRouter)
+app.use('/products', productsRouter);
+// app.use('public', express.static('images'));
+app.use('/images', express.static('public/images'));
 
 
 app.use((req: Request, res: Response) => {
