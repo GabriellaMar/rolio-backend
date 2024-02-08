@@ -21,18 +21,34 @@ const product = await Product.findById(productId);
     if (!product) {
         throw HttpError(404, "Product not found.");
     }
-    const totalPrice = product.price * quantity;
 
-    const basketItem = await Basket.create({
-        productId,
-        quantity,
-        totalPrice: totalPrice, 
-    });
+
+    let basketItem = await Basket.findOne({ productId });
+
+    const totalPrice = product.price * quantity;
+    if (!basketItem) {
+      
+        basketItem = await Basket.create({
+            productId,
+            quantity,
+            totalPrice: totalPrice,
+        });
+    } else {
+        basketItem.quantity += 1;
+        basketItem.totalPrice = product.price * basketItem.quantity;
+         await basketItem.save();
+    }
+   
+
+    // const basketItem = await Basket.create({
+    //     productId,
+    //     quantity,
+    //     totalPrice: totalPrice, 
+    // });
 
     res.status(201).json(basketItem);
 }
 
 export default {
-    // getAllProducts: ctrlWrapper(getAllProducts),
     addBasketItem: ctrlWrapper(addBasketItem),
 }

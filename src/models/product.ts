@@ -1,6 +1,6 @@
 import { model, Schema } from "mongoose";
 import {IProduct} from "../types/products";
-// import { handleMongooseError, runValidateAtUpdate } from "../schemas/mongoose-hooks";
+
 
 
  const productSchema: Schema = new Schema({

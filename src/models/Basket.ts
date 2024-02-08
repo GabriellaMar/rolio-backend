@@ -1,6 +1,6 @@
 import { model, Schema } from "mongoose";
 import {IBasket} from "../types/basket";
-// import { handleMongooseError, runValidateAtUpdate } from "../schemas/mongoose-hooks";
+
 
 
  const basketSchema: Schema = new Schema({
@@ -18,9 +18,5 @@ import {IBasket} from "../types/basket";
       
 },  {versionKey: false, timestamps: true})
 
-
-// productSchema.post("save", handleMongooseError);
-// productSchema.pre('findOneAndUpdate', runValidateAtUpdate);
-// productSchema.post('findOneAndUpdate', handleMongooseError);
 
 export default model<IBasket>("Basket", basketSchema);
