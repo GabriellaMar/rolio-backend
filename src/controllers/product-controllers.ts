@@ -1,6 +1,6 @@
 // import { Response, Request } from "express"
 import { IProduct } from "../types/products";
-import Product from "../models/Product"
+import Product from "../models/Product";
 
 
 import ctrlWrapper from "../decorators/ctrlWrappers";
