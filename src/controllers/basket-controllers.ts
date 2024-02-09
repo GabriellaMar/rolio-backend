@@ -1,7 +1,7 @@
 import ctrlWrapper from "../decorators/ctrlWrappers";
 import HttpError from "../helpers/HTTPErrors";
-import Basket from "../models/Basket";
-import Product from "../models/Product";
+import Basket from "../models/basket";
+import Product from "../models/product";
 import { MiddlewareFn } from "../types/middleware";
 
 
