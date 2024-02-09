@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import {IBasket} from "../types/basket";
+import {IBasket} from "../../types/basket";
 
 
 

@@ -1,7 +1,10 @@
 import ctrlWrapper from "../decorators/ctrlWrappers";
 import HttpError from "../helpers/HTTPErrors";
-import Basket from "../models/basket";
-import Product from "../models/product";
+import Basket from "../models/basket-model/Basket";
+
+
+// import Basket from "../models/basket";
+import Product from "../models/product-model/Product";
 import { MiddlewareFn } from "../types/middleware";
 
 

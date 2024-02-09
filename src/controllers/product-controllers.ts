@@ -6,7 +6,8 @@ import * as fs from 'fs/promises'
 
 import path from "path";
 import HttpError from "../helpers/HTTPErrors";
-import Product from "../models/product";
+import Product from "../models/product-model/Product";
+
 
 
 // const BASE_URL_BACK: string | undefined = process.env.BASE_URL_BACK 

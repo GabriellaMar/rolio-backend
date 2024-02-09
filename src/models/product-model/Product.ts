@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import {IProduct} from "../types/products";
+import {IProduct} from "../../types/products";
 
 
 
