@@ -1,14 +1,12 @@
 // import { Response, Request } from "express"
 import { IProduct } from "../types/products";
-import Product from "../models/Product";
-
-
 import ctrlWrapper from "../decorators/ctrlWrappers";
 import { MiddlewareFn } from "../types/middleware";
 import * as fs from 'fs/promises'
 
 import path from "path";
 import HttpError from "../helpers/HTTPErrors";
+import Product from "../models/Product";
 
 // const BASE_URL_BACK: string | undefined = process.env.BASE_URL_BACK 
 
