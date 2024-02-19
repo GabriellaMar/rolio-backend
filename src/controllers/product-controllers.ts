@@ -17,32 +17,35 @@ const imagePath = path.resolve("public", "images")
 
 
 const getAllProducts: MiddlewareFn = async (req, res) => {
-    try {
-        const products: IProduct[] = await Product.find()
-        res.status(200).json(products)
-    } catch (error) {
+   
+        const products: IProduct[] = await Product.find();
 
-    }
+        if(!products){
+            throw HttpError(404, 'No products found'); 
+        }
+        
+        res.status(200).json(products)
+   
 }
 
 
-const add: MiddlewareFn = async (req, res) => {
+const addProduct: MiddlewareFn = async (req, res) => {
 
     if (!req.file) {
         throw HttpError(400, 'No file uploaded');
     }
 
     const { path: oldPath, filename } = req.file;
-    const body = req.body;
+     const {title, description, details, price} = req.body;
     const newPath = path.join(imagePath, filename);
     await fs.rename(oldPath, newPath);
     const productURL = path.join("images", filename);
     const newProduct = {
-        title: req.body.title,
-        description: req.body.description,
-        details: req.body.details,
+        title: title,
+        description: description,
+        details: details,
         img:  productURL.replace(/\\/g, "/"),
-        price: req.body.price,
+        price: price,
     } as IProduct
 
     const result = await Product.create({ ...newProduct });
@@ -53,7 +56,7 @@ const add: MiddlewareFn = async (req, res) => {
 
 export default {
     getAllProducts: ctrlWrapper(getAllProducts),
-    addProduct: ctrlWrapper(add),
+    addProduct: ctrlWrapper(addProduct),
 }
 
 

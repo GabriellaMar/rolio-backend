@@ -4,6 +4,7 @@ import {IProduct} from "../../types/products";
 
 
  const productSchema: Schema = new Schema({
+  
     title: {
         type: String,
         required: true,
@@ -31,6 +32,6 @@ import {IProduct} from "../../types/products";
 // productSchema.pre('findOneAndUpdate', runValidateAtUpdate);
 // productSchema.post('findOneAndUpdate', handleMongooseError);
 
-export default model<IProduct>("Product", productSchema);
+export default model<IProduct>("product", productSchema);
 
 

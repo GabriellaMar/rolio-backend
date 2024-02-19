@@ -10,7 +10,14 @@ const basketValidate = validateBodyWrapper(basketJoiSchema);
 
 
 
+
+basketRouter.get('/', basketController.getAllBasketItem);
+
 basketRouter.post('/',  basketValidate, basketController.addBasketItem);
+
+
+basketRouter.delete('/:productId', basketController.removeBasketItem);
+// basketRouter.delete('/', basketController.removeBasketItem);
 
 
 export default basketRouter

@@ -6,13 +6,13 @@ import productsRouter from "./routes/products-router";
 import basketRouter from "./routes/basket-routes";
 
 
-const app: Express = express()
-app.use(cors())
+const app: Express = express();
+app.use(cors());
 app.use(express.json());
 
 
 app.use('/products', productsRouter);
-app.use('/basket', basketRouter)
+app.use('/basket', basketRouter);
 // app.use('public', express.static('images'));
 app.use('/images', express.static('public/images'));
 

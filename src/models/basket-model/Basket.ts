@@ -3,20 +3,55 @@ import {IBasket} from "../../types/basket";
 
 
 
- const basketSchema: Schema = new Schema({
-    productId: {
-        type: String,
-        required: true,
-    },
-    quantity: {
-        type: Number,
-        required: true,
-      },
-      totalPrice: {
-        type: Number,
-      },
-      
-},  {versionKey: false, timestamps: true})
+// const basketSchema: Schema = new Schema({
+//   productId: {
+//       type: Schema.Types.ObjectId,
+//       ref: "Product", 
+//       required: true,
+//   },
+//   quantity: {
+//       type: Number,
+//       required: true,
+//       default: 0,
+//   },
+//   // totalPrice: {
+//   //     type: Number,
+//   // },
+// }, { versionKey: false, timestamps: true });
+
+// export default model<IBasket>("Basket", basketSchema);
 
 
-export default model<IBasket>("Basket", basketSchema);
+const basketSchema: Schema = new Schema({
+  product: {
+      type: Schema.Types.ObjectId,
+      ref: "product", 
+      required: true,
+  },
+  quantity: {
+      type: Number,
+      required: true,
+      default: 0,
+  },
+
+}, { versionKey: false, timestamps: true });
+
+export default model<IBasket>("basket", basketSchema);
+
+
+  // totalPrice: {
+  //     type: Number,
+  //     required: true,
+  // },
+  // title: {
+  //     type: String,
+  //     required: true,
+  // },
+  // img: {
+  //     type: String,
+  //     required: true,
+  // },
+  // price: {
+  //     type: Number,
+  //     required: true,
+  // }
