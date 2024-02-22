@@ -5,7 +5,7 @@
 // }
 
 export interface IBasket extends Document {
-    productId: string;
+    id: string;
     title: string;
     img: string;
     price: number;

@@ -23,7 +23,7 @@ const getAllBasketItem: MiddlewareFn = async(req, res)=>{
 
 const addBasketItem: MiddlewareFn = async (req, res) => {
 
-    const { productId, quantity } = req.body;
+    const { id, quantity } = req.body;
 
    
 
@@ -31,17 +31,17 @@ const addBasketItem: MiddlewareFn = async (req, res) => {
     //     throw HttpError(400, "Missing productId or quantity in the request body.");
     // }
 
-    const product = await Product.findById(productId);
+    const product = await Product.findById(id);
 
     if (!product) {
         throw HttpError(404, "Product not found.");
     }
 
-        let basketItem = await Basket.findOne( { productId } );
+        let basketItem = await Basket.findOne( { id } );
 
     if (!basketItem) {
         basketItem = await Basket.create({
-                productId,
+                id,
                 title: product.title,
                 img: product.img,
                 price: product.price,
@@ -58,16 +58,16 @@ const addBasketItem: MiddlewareFn = async (req, res) => {
 
 
 const removeBasketItem: MiddlewareFn = async (req, res) => {
-    const { productId } = req.params; 
+    const { id } = req.params; 
 
-    const deletedBasketItem = await Basket.findOneAndDelete({ productId }); 
+    const deletedBasketItem = await Basket.findOneAndDelete({ id }); 
 
     if (!deletedBasketItem) {
         throw HttpError(404, "Basket product not found"); 
     }
 
     res.status(200).json({
-       productId: deletedBasketItem.productId,
+       productId: deletedBasketItem.id,
         message: "Basket product deleted successfully."
     });
 };
@@ -114,11 +114,11 @@ const clearBasket: MiddlewareFn = async (req, res) => {
 // }
 
 const updateBasketItem = async (req: Request, res: Response, action: string) => {
-    const { productId } = req.params;
+    const { id } = req.params;
     const body = req.body;
-    console.log(productId);
+    console.log(id);
     console.log(req.body);
-    let basketItem = await Basket.findOne({ productId });
+    let basketItem = await Basket.findOne({ id });
 
     if (!basketItem) {
         throw HttpError(404, "Basket product is not in the basket");
@@ -137,7 +137,7 @@ const updateBasketItem = async (req: Request, res: Response, action: string) => 
         ...body,
         quantity: newQuantity }
 
-    const result = await Basket.findByIdAndUpdate(productId,  updatedQuantity, { new: true });
+    const result = await Basket.findByIdAndUpdate(id,  updatedQuantity, { new: true });
 
     res.status(200).json(result);
 }

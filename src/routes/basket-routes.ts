@@ -17,10 +17,10 @@ basketRouter.get('/', basketController.getAllBasketItem);
 basketRouter.post('/',  basketValidate, basketController.addBasketItem);
 
 
-basketRouter.delete('/:productId', basketController.removeBasketItem);
+basketRouter.delete('/:id', basketController.removeBasketItem);
 
-basketRouter.patch('/increment/:productId', basketController.incrementBasketItem);
-basketRouter.patch('/decrement/:productId', basketController.decrementBasketItem);
+basketRouter.patch('/increment/:id', basketController.incrementBasketItem);
+basketRouter.patch('/decrement/:id', basketController.decrementBasketItem);
 
 basketRouter.delete('/', basketController.clearBasket);
 
