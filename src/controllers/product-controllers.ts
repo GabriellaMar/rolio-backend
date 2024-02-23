@@ -2,6 +2,7 @@
 import { IProduct } from "../types/products";
 import ctrlWrapper from "../decorators/ctrlWrappers";
 import { MiddlewareFn } from "../types/middleware";
+
 import * as fs from 'fs/promises'
 
 import path from "path";
@@ -40,6 +41,7 @@ const addProduct: MiddlewareFn = async (req, res) => {
     const newPath = path.join(imagePath, filename);
     await fs.rename(oldPath, newPath);
     const productURL = path.join("images", filename);
+  
     const newProduct = {
         title: title,
         description: description,

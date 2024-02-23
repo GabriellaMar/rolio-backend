@@ -39,7 +39,7 @@ import {IBasket} from "../../types/basket";
 // export default model<IBasket>("basket", basketSchema);
 
 const basketSchema: Schema = new Schema({
-  id: {
+  _id: {
       type: Schema.Types.ObjectId,
       ref: "Product",
       required: true

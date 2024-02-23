@@ -1,7 +1,7 @@
 import Joi, { Schema } from 'joi';
 
 export const basketJoiSchema: Schema = Joi.object({
-    id: Joi.string() 
+    _id: Joi.string() 
     .required()
     .messages({
         'any.required': 'Missing required product id',

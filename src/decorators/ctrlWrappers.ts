@@ -1,6 +1,5 @@
 
-// import { Request, Response, NextFunction } from "express";
-import { MiddlewareFn } from "../types/middleware";
+import {  MiddlewareFn } from "../types/middleware";
 
    
 
@@ -17,3 +16,6 @@ import { MiddlewareFn } from "../types/middleware";
     };
     
     export default ctrlWrapper;
+
+
+ 

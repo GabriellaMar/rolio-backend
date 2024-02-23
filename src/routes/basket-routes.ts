@@ -18,9 +18,9 @@ basketRouter.post('/',  basketValidate, basketController.addBasketItem);
 
 
 basketRouter.delete('/:id', basketController.removeBasketItem);
-
-basketRouter.patch('/increment/:id', basketController.incrementBasketItem);
-basketRouter.patch('/decrement/:id', basketController.decrementBasketItem);
+basketRouter.patch('/:action/:id', basketController.updateBasketItem)
+// basketRouter.patch('/increment/:id', basketController.incrementBasketItem);
+// basketRouter.patch('/decrement/:id', basketController.decrementBasketItem);
 
 basketRouter.delete('/', basketController.clearBasket);
 
