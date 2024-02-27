@@ -119,26 +119,16 @@ const clearBasket: MiddlewareFn = async (req, res) => {
 const updateBasketItem  = async (req: Request, res: Response) => {
     const { action, id: _id } = req.params;
     const body = req.body;
-    // console.log(_id);
-    // console.log(req.body);
+
     let basketItem = await Basket.findOne({ _id });
 
     if (!basketItem) {
         throw HttpError(404, "Basket product is not in the basket");
     }
 
-    // let newQuantity = basketItem.quantity;
-
-    // if (action === 'decrement') {
-    //     newQuantity += 1;
-    // } else if (action === 'increment' && newQuantity > 0) {
-    //     newQuantity -= 1;
-    // }
-
-    
     let newQuantity = basketItem.quantity;
 
-     if (action === 'increment') {
+     if (action === 'increment' ) {
         newQuantity += 1;
     }
 
