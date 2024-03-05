@@ -12,7 +12,9 @@ import updateCtrlWrapper from "../decorators/updateCtrlWrapper";
 
 
 const getAllBasketItem: MiddlewareFn = async(req, res)=>{
-    const items: IBasket[] = await Basket.find({})
+    const sessionId = req.cookies.session;
+    console.log("SESSION ID:", sessionId)
+    const items: IBasket[] = await Basket.find({sessionId})
 
     if(items.length=== 0){
         throw HttpError(404, "There are no products in the basket");
@@ -25,8 +27,8 @@ const getAllBasketItem: MiddlewareFn = async(req, res)=>{
 const addBasketItem: MiddlewareFn = async (req, res) => {
 
     const { _id, quantity } = req.body;
-
-   
+    const sessionId = req.session.id;
+//    console.log("SESSION ID:", sessionId)
 
     // if (!productId || !quantity) { 
     //     throw HttpError(400, "Missing productId or quantity in the request body.");
@@ -38,7 +40,7 @@ const addBasketItem: MiddlewareFn = async (req, res) => {
         throw HttpError(404, "Product not found.");
     }
 
-        let basketItem = await Basket.findOne( { _id } );
+        let basketItem = await Basket.findOne( { sessionId} );
 
     if (!basketItem) {
         basketItem = await Basket.create({
@@ -47,6 +49,7 @@ const addBasketItem: MiddlewareFn = async (req, res) => {
                 img: product.img,
                 price: product.price,
                 quantity,
+                sessionId: sessionId,
         });
     } else {
         basketItem.quantity += 1;
