@@ -15,7 +15,7 @@ const app: Express = express();
 // app.use(cors());
 app.use(cors({
   // origin: 'http://localhost:5173',
-  origin: 'https://gabriellamar.github.io/rolio-typescript/',
+  origin: 'https://gabriellamar.github.io',
   credentials: true,
 }));
 app.use(express.json());
