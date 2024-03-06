@@ -12,7 +12,7 @@ import updateCtrlWrapper from "../decorators/updateCtrlWrapper";
 
 
 const getAllBasketItem: MiddlewareFn = async(req, res)=>{
-    const sessionId = req.cookies.session;
+    const sessionId = req.session.id;
     console.log("SESSION ID:", sessionId)
     const items: IBasket[] = await Basket.find({sessionId})
 
@@ -40,7 +40,7 @@ const addBasketItem: MiddlewareFn = async (req, res) => {
         throw HttpError(404, "Product not found.");
     }
 
-        let basketItem = await Basket.findOne( { sessionId} );
+    let basketItem = await Basket.findOne({ _id});
 
     if (!basketItem) {
         basketItem = await Basket.create({
@@ -49,7 +49,7 @@ const addBasketItem: MiddlewareFn = async (req, res) => {
                 img: product.img,
                 price: product.price,
                 quantity,
-                sessionId: sessionId,
+                 sessionId: sessionId,
         });
     } else {
         basketItem.quantity += 1;
@@ -62,11 +62,12 @@ const addBasketItem: MiddlewareFn = async (req, res) => {
 
 
 const removeBasketItem: MiddlewareFn = async (req, res) => {
-    // const { id } = req.params; 
+    const sessionId = req.session.id;
+    console.log(" ID:", sessionId)
     const { id: _id } = req.params;
 
 
-    const deletedBasketItem = await Basket.findOneAndDelete({ _id }); 
+    const deletedBasketItem = await Basket.findOneAndDelete({ _id}); 
 
     if (!deletedBasketItem) {
         throw HttpError(404, "Basket product not found"); 

@@ -44,6 +44,9 @@ const basketSchema: Schema = new Schema({
       ref: "Product",
       required: true
   },
+  sessionId: {
+    type: String,
+},
   title: String,
   img: String,
   price: Number,

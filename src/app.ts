@@ -32,22 +32,65 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-    // // maxAge: 1 * 24 * 60 * 60 * 1000, 
-    // maxAge: 3600000,
-    // httpOnly: true,
-   
-    // secure:  false
-},
-
+    httpOnly: false, // Встановлюйте httpOnly на false, щоб куки були доступні з клієнта
+    path: '/',
+  },
 }));
 
-
-app.get('/', (req: Request, res: Response) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
   const sessionId = req.session.id;
   console.log("SES:::", sessionId)
-  res.cookie('session', sessionId, { httpOnly: true }); // Записати ідентифікатор сесії в куку
-  res.send('Hello world');
+  res.cookie('session', sessionId, { httpOnly: false, path: '/' }); 
+  const ses = req.cookies.session
+  console.log("COOKIE:::", ses)
+  next();
 });
+// app.use((req: Request, res: Response, next: NextFunction) => {
+//   const sessionIdCookie = req.cookies.session;
+//   const currentSessionId = req.session.id;
+
+//   if (!sessionIdCookie || sessionIdCookie !== currentSessionId) { 
+//     console.log("Updating session ID in cookie...");
+//     res.cookie('session', currentSessionId, { httpOnly: true });
+//   }
+//   next();
+// });
+// app.use((req: Request, res: Response, next: NextFunction) => {
+//   console.log("!!!!:", req.cookies.session)
+
+//   if (!req.cookies.session) { 
+//     const sessionId = req.sessionID;
+//     console.log("Updating session ID in cookie...", sessionId);
+//     res.cookie('session', sessionId, { httpOnly: true });
+//   }
+//   next();
+// });
+
+
+app.use('/products', productsRouter);
+app.use('/basket', basketRouter);
+// app.use('public', express.static('images'));
+app.use('/images', express.static('public/images'));
+
+
+
+app.use((req: Request, res: Response) => {
+    res.status(404).json({ message: 'Not found' })
+  })
+  
+  app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+    const { status = 500, message = 'Server error' } = err ;
+    res.status(status).json({ message })
+  })
+
+export default app;
+
+// app.get('/', (req: Request, res: Response) => {
+//   const sessionId = req.session.id;
+//   console.log("SES:::", sessionId)
+//   res.cookie('session', sessionId, { httpOnly: true }); // Записати ідентифікатор сесії в куку
+//   res.send('Hello world');
+// });
 
 // Роут для головної сторінки
 // app.get('/', (req: Request, res: Response) => {
@@ -67,21 +110,3 @@ app.get('/', (req: Request, res: Response) => {
 //   }
 //   next();
 // });
-
-app.use('/products', productsRouter);
-app.use('/basket', basketRouter);
-// app.use('public', express.static('images'));
-app.use('/images', express.static('public/images'));
-
-
-
-app.use((req: Request, res: Response) => {
-    res.status(404).json({ message: 'Not found' })
-  })
-  
-  app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-    const { status = 500, message = 'Server error' } = err ;
-    res.status(status).json({ message })
-  })
-
-export default app;

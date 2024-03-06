@@ -6,6 +6,7 @@
 
 export interface IBasket extends Document {
     id: string;
+    sessionId: string;
     title: string;
     img: string;
     price: number;
