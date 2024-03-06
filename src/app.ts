@@ -15,8 +15,8 @@ const app: Express = express();
 // app.use(cors());
 app.use(cors({
   // origin: 'http://localhost:5173',
-  origin: 'https://gabriellamar.github.io',
-  credentials: true,
+  // origin: 'https://gabriellamar.github.io',
+  // credentials: true,
 }));
 app.use(express.json());
 app.use(cookieParser());
@@ -28,24 +28,24 @@ app.use(cookieParser());
 // res.cookie('sky', 'blue', {httpOnly: true})
 // res.send('Hallo world')
 // })
-app.use(session({
-  secret: 'secret-key-cat',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    httpOnly: false, // Встановлюйте httpOnly на false, щоб куки були доступні з клієнта
-    path: '/',
-  },
-}));
+// app.use(session({
+//   secret: 'secret-key-cat',
+//   resave: false,
+//   saveUninitialized: false,
+//   cookie: {
+//     httpOnly: false, // Встановлюйте httpOnly на false, щоб куки були доступні з клієнта
+//     path: '/',
+//   },
+// }));
 
-app.use((req: Request, res: Response, next: NextFunction) => {
-  const sessionId = req.session.id;
-  console.log("SES:::", sessionId)
-  res.cookie('session', sessionId, { httpOnly: false, path: '/' }); 
-  const ses = req.cookies.session
-  console.log("COOKIE:::", ses)
-  next();
-});
+// app.use((req: Request, res: Response, next: NextFunction) => {
+//   const sessionId = req.session.id;
+//   console.log("SES:::", sessionId)
+//   res.cookie('session', sessionId, { httpOnly: false, path: '/' }); 
+//   const ses = req.cookies.session
+//   console.log("COOKIE:::", ses)
+//   next();
+// });
 // app.use((req: Request, res: Response, next: NextFunction) => {
 //   const sessionIdCookie = req.cookies.session;
 //   const currentSessionId = req.session.id;
