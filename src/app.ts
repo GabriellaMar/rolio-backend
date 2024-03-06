@@ -14,7 +14,8 @@ import basketRouter from "./routes/basket-routes";
 const app: Express = express();
 // app.use(cors());
 app.use(cors({
-  origin: 'http://localhost:5173',
+  // origin: 'http://localhost:5173',
+  origin: 'https://gabriellamar.github.io/rolio-typescript/',
   credentials: true,
 }));
 app.use(express.json());
