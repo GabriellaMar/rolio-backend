@@ -2,7 +2,6 @@ import ctrlWrapper from "../decorators/ctrlWrappers";
 import HttpError from "../helpers/HTTPErrors";
 import Basket from "../models/basket-model/Basket";
 import Order from "../models/order-model/Order";
-import { IBasket } from "../types/basket";
 import { MiddlewareFn } from "../types/middleware";
 import { IOrder } from "../types/orders";
 
