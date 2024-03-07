@@ -8,6 +8,7 @@ import { nanoid } from "nanoid";
 import cors from 'cors';
 import productsRouter from "./routes/products-router";
 import basketRouter from "./routes/basket-routes";
+import ordersRouter from "./routes/order-routes";
 // -----SESSION ID -----------
 // const sessionSecretKey = nanoid(32);
 
@@ -71,7 +72,9 @@ app.use(cookieParser());
 app.use('/products', productsRouter);
 app.use('/basket', basketRouter);
 // app.use('public', express.static('images'));
+app.use('/orders', ordersRouter);
 app.use('/images', express.static('public/images'));
+
 
 
 

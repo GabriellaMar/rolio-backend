@@ -36,7 +36,7 @@ const addBasketItem: MiddlewareFn = async (req, res) => {
         throw HttpError(404, "Product not found.");
     }
 
-    let basketItem = await Basket.findOne({ _id});
+    let basketItem  = await Basket.findOne({ _id});
 
     if (!basketItem) {
         basketItem = await Basket.create({

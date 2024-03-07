@@ -12,16 +12,8 @@ export const basketJoiSchema: Schema = Joi.object({
     .messages({
         'number.min': 'The quantity must be greater than or equal to 0',
       }),
-      // totalPrice: Joi.number()
-      // // .required()
-      // .messages({
-      //     'number.min': 'The totalPrice must be greater than or equal to 0',
-      //   }),
+   
 });
 
 
- // product: Joi.object() 
-    // .required()
-    // .messages({
-    //     'any.required': 'Missing required product id',
-    // }),
+
