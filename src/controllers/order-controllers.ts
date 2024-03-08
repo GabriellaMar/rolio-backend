@@ -72,9 +72,7 @@ const updateOrderById: MiddlewareFn = async(req, res)=>{
 
 
    const resetOrder: MiddlewareFn = async (req, res) => {
-  
     await Order.deleteMany({}); 
-
         res.status(200).json({
             message: "Basket cleared successfully" 
          });
