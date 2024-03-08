@@ -18,9 +18,10 @@ const getAllOrders: MiddlewareFn = async(req, res)=>{
 
 
 const addOrder: MiddlewareFn = async(req, res)=>{
-    const{ userName, phone, deliveryMethod, deliveryAddress,}= req.body
+    const{ userName, phone, deliveryMethod, deliveryAddress, products}= req.body
 
    let basketProducts = await Basket.find();
+ 
 
     console.log(basketProducts)
 
@@ -29,7 +30,7 @@ const addOrder: MiddlewareFn = async(req, res)=>{
 }
 
    const order = await Order.create({
-        products: basketProducts.map(product => product._id),
+        products: basketProducts,
         userName,
         phone,
         deliveryMethod,

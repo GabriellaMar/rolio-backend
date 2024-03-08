@@ -35,6 +35,7 @@ export const orderJoiSchema = Joi.object({
       .messages({
         'any.required': 'missing required delivery address field',
       }),
+      products: Joi.array()
     //   totalPrice: Joi.number()
     //   .messages({
     //     'any.required': 'total price must be  greater than or equal to 0',

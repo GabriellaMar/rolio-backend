@@ -29,8 +29,9 @@ const orderSchema: Schema = new Schema({
     },
     products: [{
         type: Schema.Types.ObjectId,
-        ref: 'Basket'
+        ref: 'basket'
     }],
+    
     // totalPrice: {
     //     type: Number,
     // }
