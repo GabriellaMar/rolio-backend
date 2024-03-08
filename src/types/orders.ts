@@ -6,7 +6,7 @@ export interface IOrder extends Document {
     phone: string
     products: IBasket[],
     deliveryMethod: string,
-    deliveryAddress:string,
+    deliveryAddress: string,
     // totalPrice: number,
     
 }

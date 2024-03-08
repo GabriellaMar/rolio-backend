@@ -29,7 +29,7 @@ const addOrder: MiddlewareFn = async(req, res)=>{
 }
 
    const order = await Order.create({
-        products: basketProducts,
+        products: basketProducts.map(product => product._id),
         userName,
         phone,
         deliveryMethod,
