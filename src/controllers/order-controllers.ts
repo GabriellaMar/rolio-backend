@@ -18,7 +18,7 @@ const getAllOrders: MiddlewareFn = async(req, res)=>{
 
 
 const addOrder: MiddlewareFn = async(req, res)=>{
-    const{ userName, phone, deliveryMethod, deliveryAddress, products}= req.body
+    const{ userName, phone, deliveryMethod, deliveryAddress}= req.body
 
    let basketProducts = await Basket.find();
  

@@ -30,7 +30,7 @@ export const orderJoiSchema = Joi.object({
       .messages({
         'any.required': 'missing required delivery method field',
       }),
-      deliveryAddress: Joi.string()
+      deliveryAddress: Joi.object()
       .required()
       .messages({
         'any.required': 'missing required delivery address field',

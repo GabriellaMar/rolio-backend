@@ -24,7 +24,7 @@ const orderSchema: Schema = new Schema({
     },
     deliveryAddress:
     {
-        type: String,
+        type: Object,
         required: true
     },
     products: [{
