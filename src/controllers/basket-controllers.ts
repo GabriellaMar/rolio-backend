@@ -5,7 +5,7 @@ import HttpError from "../helpers/HTTPErrors";
 import Basket from "../models/basket-model/Basket";
 import Product from "../models/product-model/Product";
 import { IBasket } from "../types/basket";
-import { MiddlewareFn, MiddlewareFnWithAction } from "../types/middleware";
+import { MiddlewareFn } from "../types/middleware";
 import updateCtrlWrapper from "../decorators/updateCtrlWrapper";
 
 

@@ -23,7 +23,7 @@ const addOrder: MiddlewareFn = async(req, res)=>{
    let basketProducts = await Basket.find();
  
 
-    console.log(basketProducts)
+    // console.log(basketProducts)
 
    if (basketProducts.length === 0) {
     throw HttpError(404, "There are no products in the basket");

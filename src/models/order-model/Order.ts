@@ -32,10 +32,6 @@ const orderSchema: Schema = new Schema({
         ref: 'basket'
     }],
     
-    // totalPrice: {
-    //     type: Number,
-    // }
-
-});
+}, {versionKey: false, timestamps: true});
 
 export default model<IOrder>('order', orderSchema);

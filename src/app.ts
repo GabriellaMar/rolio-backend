@@ -9,6 +9,7 @@ import cors from 'cors';
 import productsRouter from "./routes/products-router";
 import basketRouter from "./routes/basket-routes";
 import ordersRouter from "./routes/order-routes";
+import reviewRouter from "./routes/review-routes";
 // -----SESSION ID -----------
 // const sessionSecretKey = nanoid(32);
 
@@ -73,6 +74,7 @@ app.use('/products', productsRouter);
 app.use('/basket', basketRouter);
 // app.use('public', express.static('images'));
 app.use('/orders', ordersRouter);
+app.use('/reviews',reviewRouter);
 app.use('/images', express.static('public/images'));
 
 
