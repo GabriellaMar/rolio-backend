@@ -4,17 +4,12 @@ import ctrlWrapper from "../decorators/ctrlWrappers";
 import { MiddlewareFn } from "../types/middleware";
 import { nanoid } from "nanoid";
 import * as fs from 'fs/promises'
-
 import path from "path";
 import HttpError from "../helpers/HTTPErrors";
 import Product from "../models/product-model/Product";
 
 
-
-// const BASE_URL_BACK: string | undefined = process.env.BASE_URL_BACK 
-
 const imagePath = path.resolve("public", "images")
-
 
 
 const getAllProducts: MiddlewareFn = async (req, res) => {
@@ -23,18 +18,26 @@ const getAllProducts: MiddlewareFn = async (req, res) => {
     // if (sessionId) {
     //     res.cookie('session', sessionId, { httpOnly: true });
     // }
-   
-
         const products: IProduct[] = await Product.find();
 
         if(!products){
             throw HttpError(404, 'No products found'); 
         }
-        
         res.status(200).json(products)
-   
 }
 
+
+  const getProductById: MiddlewareFn = async (req, res) => {
+
+    const { id: _id } = req.params;
+    const product = await Product.findById({ _id});
+
+    if (!product) {
+        throw HttpError(404, "The product is not found");
+    }
+
+    res.status(200).json(product);
+}
 
 const addProduct: MiddlewareFn = async (req, res) => {
     // const sessionId = nanoid(10)
@@ -65,11 +68,47 @@ const addProduct: MiddlewareFn = async (req, res) => {
 }
 
 
-export default {
-    getAllProducts: ctrlWrapper(getAllProducts),
-    addProduct: ctrlWrapper(addProduct),
+const removeProduct: MiddlewareFn = async (req, res) => {
+
+    const { id: _id } = req.params;
+
+    const deletedProduct = await Product.findOneAndDelete({ _id}); 
+
+    if (!deletedProduct) {
+        throw HttpError(404, "Product not found"); 
+    }
+
+    res.status(200).json({
+        message: "This product deleted successfully."
+    });
+
+}
+
+
+const updateProductById: MiddlewareFn = async (req, res) => {
+
+    const { id: _id } = req.params;
+    const body = req.body;
+
+    let productItem = await Product.findOne({ _id });
+
+    if (!productItem) {
+        throw HttpError(404, "There is no product in a product list");
+    }
+
+    const result = await Product.findByIdAndUpdate(_id,  body, { new: true });
+
+    res.status(200).json(result);
 }
 
 
 
-// img: req.file ? req.file.path : '',
+export default {
+    getAllProducts: ctrlWrapper(getAllProducts),
+    getProductById: ctrlWrapper(getProductById),
+    addProduct: ctrlWrapper(addProduct),
+    removeProduct: ctrlWrapper(removeProduct),
+    updateProductById: ctrlWrapper(updateProductById),
+
+}
+
