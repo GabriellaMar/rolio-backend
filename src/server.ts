@@ -5,8 +5,8 @@ dotenv.config();
 
 
  const PORT: string | number = process.env.PORT || 4000
-
- const DB_HOST: string = process.env.DB_HOST || "";
+ const DB_HOST: string = process.env.DB_HOST || '';
+ 
 
 mongoose.connect(DB_HOST)
   .then(() => {
