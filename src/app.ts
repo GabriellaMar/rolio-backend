@@ -11,7 +11,7 @@ import reviewRouter from "./routes/review-routes";
 
 const app: Express = express();
 
-app.use(cors({}));
+app.use(cors());
 app.use(express.json());
 
 
