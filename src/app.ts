@@ -1,10 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import express, { Express } from "express";
-import session from 'express-session';
-import cookieParser from 'cookie-parser';
-// import * as nanoid from 'nanoid';
-import { nanoid } from "nanoid";
-
+import 'dotenv/config';
 import cors from 'cors';
 import productsRouter from "./routes/products-router";
 import basketRouter from "./routes/basket-routes";
