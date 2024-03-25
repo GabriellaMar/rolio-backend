@@ -2,7 +2,6 @@ import { model, Schema } from "mongoose";
 import {IProduct} from "../../types/products";
 
 
-
  const productSchema: Schema = new Schema({
   
     title: {
@@ -27,10 +26,6 @@ import {IProduct} from "../../types/products";
       }
 },  {versionKey: false, timestamps: true})
 
-
-// productSchema.post("save", handleMongooseError);
-// productSchema.pre('findOneAndUpdate', runValidateAtUpdate);
-// productSchema.post('findOneAndUpdate', handleMongooseError);
 
 export default model<IProduct>("product", productSchema);
 

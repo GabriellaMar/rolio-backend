@@ -6,13 +6,9 @@ dotenv.config();
 
  const PORT: string | number = process.env.PORT || 4000
 
-// const DB_HOST: string = process.env.DB_HOST || "";
-// app.use((req,res)=>{
-//     res.send('Hello')
-// })
+ const DB_HOST: string = process.env.DB_HOST || "";
 
-mongoose.connect('mongodb+srv://Gabriella:MkrzUBn7szgS0Tt6@cluster0.i5vmm9f.mongodb.net/db-rolio?retryWrites=true&w=majority'
-)
+mongoose.connect(DB_HOST)
   .then(() => {
     app.listen(PORT, () => {
       console.log("Database connection successful")

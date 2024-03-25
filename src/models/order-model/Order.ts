@@ -3,10 +3,7 @@ import { IOrder } from "../../types/orders";
 
 
 const orderSchema: Schema = new Schema({
-    // _id: {
-    //     type: String
-    //     // required: true
-    //   },
+
     userName:
     {
         type: String,

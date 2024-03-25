@@ -1,12 +1,8 @@
-// export interface IBasket extends Document {
-//     productId: string,
-//     quantity: number,
-//     //  totalPrice: number,
-// }
+
 
 export interface IBasket extends Document {
+    userId: string;
     id: string;
-    // sessionId: string;
     title: string;
     img: string;
     price: number;

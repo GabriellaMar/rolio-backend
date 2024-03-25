@@ -14,7 +14,7 @@ productsRouter.post('/',  upload.single('img'), productsController.addProduct);
 
 productsRouter.delete('/:id', isValidId, productsController.removeProduct);
 
-productsRouter.patch('/:id', isValidId, productsController.updateProductById)
+productsRouter.patch('/:id', isValidId, productsController.updateProductById);
 
 export default productsRouter
 

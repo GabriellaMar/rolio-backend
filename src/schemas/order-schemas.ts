@@ -4,11 +4,7 @@ import Joi from "joi";
 const phoneRegexp = /^\+\d{1,3}\d{9}$/
 
 export const orderJoiSchema = Joi.object({
-    // _id: Joi.string() 
-    // .required()
-    // .messages({
-    //     'any.required': 'Missing required order id',
-    // }),
+  
     userName: Joi.string()
       .min(3)
       .max(30)

@@ -11,15 +11,13 @@ const basketRouter: Router = Router();
 const basketValidate = validateBodyWrapper(basketJoiSchema);
 
 
-
-
 basketRouter.get('/', basketController.getAllBasketItem);
 
 basketRouter.post('/',  basketValidate, basketController.addBasketItem);
 
-
 basketRouter.delete('/:id', isValidId, basketController.removeBasketItem);
-basketRouter.patch('/:action/:id', isValidId, basketController.updateBasketItem)
+
+basketRouter.patch('/:action/:id', isValidId, basketController.updateBasketItem);
 
 basketRouter.delete('/', basketController.clearBasket);
 

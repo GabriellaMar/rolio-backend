@@ -4,6 +4,7 @@ import { IBasket } from "../../types/basket";
 
 
 const basketSchema: Schema = new Schema({
+  userId: { type: String },
   _id: {
     type: Schema.Types.ObjectId,
     ref: "Product",

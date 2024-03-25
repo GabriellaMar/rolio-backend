@@ -1,8 +1,6 @@
-// import { Response, Request } from "express"
 import { IProduct } from "../types/products";
 import ctrlWrapper from "../decorators/ctrlWrappers";
 import { MiddlewareFn } from "../types/middleware";
-import { nanoid } from "nanoid";
 import * as fs from 'fs/promises'
 import path from "path";
 import HttpError from "../helpers/HTTPErrors";
@@ -13,11 +11,7 @@ const imagePath = path.resolve("public", "images")
 
 
 const getAllProducts: MiddlewareFn = async (req, res) => {
-    // const sessionId = req.session.id;
-    // console.log("!!!!",sessionId)
-    // if (sessionId) {
-    //     res.cookie('session', sessionId, { httpOnly: true });
-    // }
+
         const products: IProduct[] = await Product.find();
 
         if(!products){
@@ -40,9 +34,6 @@ const getAllProducts: MiddlewareFn = async (req, res) => {
 }
 
 const addProduct: MiddlewareFn = async (req, res) => {
-    // const sessionId = nanoid(10)
-    // //    session[sessionId]   = {userId: 1,}
-    // res.set('Set-cookie', `session = ${sessionId}`)
 
     if (!req.file) {
         throw HttpError(400, 'No file uploaded');

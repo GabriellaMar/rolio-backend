@@ -10,9 +10,13 @@ const reviewValidate = validateBodyWrapper(reviewJoiSchema);
 
 
 reviewRouter.get('/', reviewController.getAllReviews);
+
 reviewRouter.post('/', reviewValidate, reviewController.addReview);
-reviewRouter.patch('/:id', isValidId, reviewController.updateReviewById)
+
+reviewRouter.patch('/:id', isValidId, reviewController.updateReviewById);
+
 reviewRouter.delete('/:id',isValidId, reviewController.removeReview);
+
 reviewRouter.delete('/', reviewController.resetReview);
 
 

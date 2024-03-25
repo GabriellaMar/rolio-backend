@@ -1,11 +1,7 @@
 import Joi from "joi";
 
 export const reviewJoiSchema = Joi.object({
-    // _id: Joi.string() 
-    // .required()
-    // .messages({
-    //     'any.required': 'Missing required product id',
-    // }),
+   
     userName: Joi.string()
       .required()
       .min(2)

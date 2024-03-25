@@ -5,7 +5,6 @@ import path from "path";
 
 type FileNameCallback = (error: Error | null, filename: string) => void;
 
-
 const destination = path.resolve('tmp');
 
 const storage = multer.diskStorage({
@@ -16,7 +15,6 @@ const storage = multer.diskStorage({
         cb(null, fileName);
     }
 })
-
 
 
 export const fileFilter = (

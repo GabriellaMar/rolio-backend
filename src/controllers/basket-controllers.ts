@@ -11,62 +11,55 @@ import updateCtrlWrapper from "../decorators/updateCtrlWrapper";
 
 
 
-const getAllBasketItem: MiddlewareFn = async(req, res)=>{
-    // const sessionId = req.session.id;
-    // console.log("SESSION ID:", sessionId)
-    // const items: IBasket[] = await Basket.find({sessionId})
-    const items: IBasket[] = await Basket.find({})
+export const getAllBasketItem: MiddlewareFn = async (req, res) => {
+    const { userId } = req.query;
+    const items: IBasket[] = await Basket.find({ userId });
 
-    if(items.length=== 0){
-        throw HttpError(404, "There are no products in the basket");
+    if (items.length === 0) {
+        throw  HttpError(404, "There are no products in the basket");
     }
 
-    res.status(200).json(items)
-}
+    res.status(200).json(items);
+};
 
-
-const addBasketItem: MiddlewareFn = async (req, res) => {
-
+export const addBasketItem: MiddlewareFn = async (req, res) => {
+    const userId = req.query.userId;
     const { _id, quantity } = req.body;
-    // const sessionId = req.session.id;
 
     const product = await Product.findById(_id);
 
     if (!product) {
-        throw HttpError(404, "Product not found.");
+        throw  HttpError(404, "Product not found.");
     }
 
-    let basketItem  = await Basket.findOne({ _id});
+    let basketItem = await Basket.findOne({ _id});
 
     if (!basketItem) {
         basketItem = await Basket.create({
-                 _id,
-                title: product.title,
-                img: product.img,
-                price: product.price,
-                quantity,
-                //  sessionId: sessionId,
+            _id,
+            title: product.title,
+            img: product.img,
+            price: product.price,
+            quantity: quantity,
+            userId: userId,
         });
-    } else {
-        basketItem.quantity += 1;
-        await basketItem.save();
+    }
+     else {
+         basketItem.quantity += quantity;
+         await basketItem.save();
     }
 
     res.status(201).json(basketItem);
 };
 
-
-
-const removeBasketItem: MiddlewareFn = async (req, res) => {
-    // const sessionId = req.session.id;
-    // console.log(" ID:", sessionId)
+export const removeBasketItem: MiddlewareFn = async (req, res) => {
+   
     const { id: _id } = req.params;
 
-
-    const deletedBasketItem = await Basket.findOneAndDelete({ _id}); 
+    const deletedBasketItem = await Basket.findOneAndDelete({ _id});
 
     if (!deletedBasketItem) {
-        throw HttpError(404, "Basket product not found"); 
+        throw  HttpError(404, "Basket product not found");
     }
 
     res.status(200).json({
@@ -75,45 +68,46 @@ const removeBasketItem: MiddlewareFn = async (req, res) => {
     });
 };
 
+export const clearBasket: MiddlewareFn = async (req, res) => {
+    const { userId } = req.query;
 
-const clearBasket: MiddlewareFn = async (req, res) => {
-  
-    await Basket.deleteMany({}); 
+    await Basket.deleteMany({ userId });
 
-        res.status(200).json({
-            message: "Basket cleared successfully" 
-         });
+    res.status(200).json({
+        message: "Basket cleared successfully"
+    });
 };
 
-
-const updateBasketItem  = async (req: Request, res: Response) => {
+export const updateBasketItem: MiddlewareFn = async (req, res) => {
     const { action, id: _id } = req.params;
+    const { userId } = req.query;
     const body = req.body;
 
-    let basketItem = await Basket.findOne({ _id });
+    let basketItem = await Basket.findOne({ _id, userId });
 
     if (!basketItem) {
-        throw HttpError(404, "Basket product is not in the basket");
+        throw  HttpError(404, "Basket product is not in the basket");
     }
 
     let newQuantity = basketItem.quantity;
 
-     if (action === 'increment' ) {
+    if (action === 'increment') {
         newQuantity += 1;
     }
 
     if (action === 'decrement' && newQuantity > 0) {
         newQuantity -= 1;
-    } 
+    }
 
-    const updatedQuantity = { 
-         ...body,
-        quantity: newQuantity }
+    const updatedQuantity = {
+        ...body,
+        quantity: newQuantity
+    };
 
-    const result = await Basket.findByIdAndUpdate(_id,  updatedQuantity, { new: true });
+    const result = await Basket.findByIdAndUpdate(_id, updatedQuantity, { new: true });
 
     res.status(200).json(result);
-}
+};
 
 
 
