@@ -1,13 +1,15 @@
 import app from "./app";
 import mongoose from "mongoose";
-import dotenv from "dotenv";
+// import dotenv from "dotenv";
 // import 'dotenv/config';
 // dotenv.config();
 
 
   const PORT: string | number = process.env.PORT || 4000
-  const DB_HOST: string | undefined= process.env.DB_HOST || '';
+  const DB_HOST: string = process.env.DB_HOST || '';
+  // const DB_HOST: string | undefined= process.env.DB_HOST || '';
 console.log(DB_HOST)
+console.log( process.env)
 //  const { DB_HOST, PORT = 4000 } = process.env;
  
 
